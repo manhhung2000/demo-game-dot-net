@@ -9,7 +9,7 @@
     <span class="wrap-break-word hyphens-auto">@Square.Text</span>
     @if (Square.IsMarked && !Square.IsFreeSpace)
     {
-        <span class="absolute top-0.5 right-0.5 text-green-600 text-xs">✓</span>
+        <span class="absolute top-0.5 right-0.5 text-neon-green text-xs" style="text-shadow: 0 0 8px var(--color-neon-green); font-size: 1.2rem;">✓</span>
     }
 </button>
 
@@ -25,15 +25,22 @@
 
     private string GetCssClasses()
     {
-        var baseClasses = "relative flex items-center justify-center p-1 text-center border border-gray-300 rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight";
+        var baseClasses = "relative flex items-center justify-center p-1 text-center border rounded transition-all duration-150 select-none min-h-[60px] text-xs leading-tight";
 
         var stateClasses = Square.IsMarked
             ? IsWinning
-                ? "bg-amber-200 border-amber-400 text-amber-900"
-                : "bg-marked border-marked-border text-green-800"
-            : "bg-white text-gray-700 active:bg-gray-100";
+                ? "bg-dark-secondary border-neon-pink text-neon-pink"
+                : "bg-dark-secondary border-neon-green text-neon-green"
+            : "bg-dark-secondary border-dark-tertiary text-light hover:scale-105 hover:border-neon-green";
 
-        var freeSpaceClasses = Square.IsFreeSpace ? "font-bold text-sm" : "";
+        var stateStyles = Square.IsMarked
+            ? IsWinning
+                ? "border-width: 2px; box-shadow: 0 0 20px rgba(255, 0, 255, 0.4), inset 0 0 10px rgba(255, 0, 255, 0.1);"
+                : "border-width: 2px; box-shadow: 0 0 20px rgba(0, 255, 136, 0.4), inset 0 0 10px rgba(0, 255, 136, 0.1);"
+            : "border-width: 1px;";
+
+        var freeSpaceClasses = Square.IsFreeSpace ? "font-bold text-sm bg-dark-tertiary border-neon-cyan" : "";
+        var freeSpaceStyle = Square.IsFreeSpace ? "border-width: 2px; box-shadow: 0 0 15px rgba(0, 212, 255, 0.3), inset 0 0 10px rgba(0, 212, 255, 0.1);" : "";
 
         return $"{baseClasses} {stateClasses} {freeSpaceClasses}";
     }

@@ -1,12 +1,19 @@
 @using SocOps.Models
 
-<div class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square">
+<div class="grid grid-cols-5 gap-1 w-full max-w-md mx-auto aspect-square bg-dark-secondary p-4 rounded-lg" style="border: 2px solid var(--color-neon-cyan); box-shadow: 0 0 30px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.05);">
     @foreach (var square in Board)
     {
-        <BingoSquare
-            Square="@square"
-            IsWinning="@WinningSquareIds.Contains(square.Id)"
-            OnClick="@(() => OnSquareClick.InvokeAsync(square.Id))" />
+        var index = Board.IndexOf(square);
+        var row = index / 5;
+        var col = index % 5;
+        var delayMs = (row * 5 + col) * 50;
+        
+        <div style="animation-delay: @(delayMs)ms;" class="animate-stagger-reveal">
+            <BingoSquare
+                Square="@square"
+                IsWinning="@WinningSquareIds.Contains(square.Id)"
+                OnClick="@(() => OnSquareClick.InvokeAsync(square.Id))" />
+        </div>
     }
 </div>
 
