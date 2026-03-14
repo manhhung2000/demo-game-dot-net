@@ -43,6 +43,7 @@ dotnet test                        # Run tests
 ## Styling
 
 Uses custom CSS utility classes (Tailwind-like) in `wwwroot/css/app.css`:
+
 - Layout: `.flex`, `.grid`, `.items-center`
 - Spacing: `.p-4`, `.mb-2`, `.mx-auto`
 - Colors: `.bg-accent`, `.bg-marked`, `.text-gray-700`
